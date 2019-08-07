@@ -30,7 +30,15 @@ const myObservable = new Observable(sequence);
 
 // subscribe to the observable
 myObservable.subscribe({
-    next(x) { console.log(x); },
-    complete() { console.log('Sequence finished'); }
+    next(x) { console.log('Subscriptor #1: ' + x); },
+    complete() { console.log('Sequence Subscriptor #1 finished'); }
 });
+
+// 0.5 sec later second flow is started (second subscriptor)
+setTimeout(() => {
+    myObservable.subscribe({
+        next(x) { console.log('Subscriptor #2: ' + x); },
+        complete() { console.log('Sequence Subscriptor #2 finished'); }
+    });
+}, 500);
 
